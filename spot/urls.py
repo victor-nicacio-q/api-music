@@ -18,8 +18,10 @@ from django.urls import path
 from django.urls import include
 from rest_framework import routers
 
-from playlist.viewsets import Record_ViewSet, Genre_ViewSet, Band_ViewSet, Music_ViewSet, Playlist_ViewSet
+#_____Views________#
+from playlist.views import Record_ViewSet, Genre_ViewSet, Band_ViewSet, Music_ViewSet, Playlist_ViewSet
 
+#_____EndPoints____#
 router = routers.DefaultRouter()
 router.register(r'Record', Record_ViewSet, base_name='Record')
 router.register(r'Genre', Genre_ViewSet, base_name='Genre')
