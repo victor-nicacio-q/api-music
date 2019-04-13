@@ -31,5 +31,6 @@ router.register(r'Playlist', Playlist_ViewSet, base_name='Playlist')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
 ]
