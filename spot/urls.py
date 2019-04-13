@@ -18,10 +18,15 @@ from django.urls import path
 from django.urls import include
 from rest_framework import routers
 
-from playlist.viewsets import Record_ViewSet
+from playlist.viewsets import Record_ViewSet, Genre_ViewSet, Band_ViewSet, Music_ViewSet, Playlist_ViewSet
 
 router = routers.DefaultRouter()
 router.register(r'Record', Record_ViewSet, base_name='Record')
+router.register(r'Genre', Genre_ViewSet, base_name='Genre')
+router.register(r'Band', Band_ViewSet, base_name='Band')
+router.register(r'Music', Music_ViewSet, base_name='Music')
+router.register(r'Playlist', Playlist_ViewSet, base_name='Playlist')
+
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),

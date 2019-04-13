@@ -40,7 +40,7 @@ class Music(models.Model):
     name = models.CharField(max_length=100)
     band = models.ForeignKey(Band, verbose_name='Band', on_delete=models.CASCADE)
     duration = models.TimeField()
-    year = models.DateField()
+    year = models.IntegerField()
 
     class Meta:
         verbose_name = u'Music'

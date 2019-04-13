@@ -51,7 +51,7 @@ class TestPlaylist(TestCase):
         self.record = mommy.make(Record, name='Sony Music')
         self.genre = mommy.make(Genre, name='Rock')
         self.band = mommy.make(Band, name='Led Zeppelin', record=self.record, genre=self.genre)
-        self.music1 = mommy.make(Music, name='Thank You', band=self.band, duration=datetime.now(), year=datetime.now())
+        self.music1 = mommy.make(Music, name='Thank You', band=self.band, duration=datetime.now(), year=0000)
         self.music2 = mommy.make(Music, name='Going to California', band=self.band, duration=datetime.now(), year=datetime.now())
         self.playlist = mommy.make(Playlist, name='Led', music=[self.music1, self.music2])
 
