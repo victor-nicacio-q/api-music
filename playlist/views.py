@@ -13,10 +13,12 @@ class Record_ViewSet(viewsets.ModelViewSet):
 
     @api_view(['GET', 'POST'])
     def Record_list(self, request):
+
         if request.method == 'GET':
             records = Record.objects.all()
             serializer_class = Record_Serializer(records)
-            return response.Response(serializer_class.data)
+            return response.Response(serializer_class.data, status=status.HTTP_200_OK)
+
         elif request.method == 'POST':
             serializer_class = Record_Serializer(data=request.data)
             if serializer_class.is_valid():
@@ -92,8 +94,52 @@ class Genre_ViewSet(viewsets.ModelViewSet):
             return response.Response(status=status.HTTP_204_NO_CONTENT)
 
 class Band_ViewSet(viewsets.ModelViewSet):
-    queryset = Band.objects.all()
+
+    def get_queryset(self):
+        return Band.objects.all()
+
     serializer_class = Band_Serializer
+
+    @api_view(['GET', 'POST'])
+    def Band_list(self, request):
+
+        if request.method == 'GET':
+            bands = Band.objects.all()
+            serializer = Band_Serializer(bands)
+            return response.Reponse(serializer.data, status=status.HTTP_200_OK)
+
+        elif request.method == 'POST':
+            serializer = Band_Serializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return response.Response(serializer.data, status=status.HTTP_200_OK)
+            return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @api_view(['GET', 'PUT', 'DELETE'])
+    def Band_detail(self, request, pk):
+
+        try:
+            band = Band.objects.get(pk=pk)
+        except Band.DoesNotExist:
+            return response.Response(status=status.HTTP_404_NOT_FOUND)
+
+        if request.method == 'GET':
+            serializer = Band_Serializer(band)
+            return response.Response(band.data, status=status.HTTP_200_OK)
+
+        elif request.method == 'PUT':
+            serializer = Band_Serializer(band, data=request.data)
+            if serializer.is_valid():
+
+                serializer.save()
+                return response.Response(serializer.data, status=status.HTTP_200_OK)
+
+            return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        elif request.method == 'DELETE':
+            band.delete()
+            return response.Response(status=status.HTTP_404_NOT_FOUND)
+
 
 class Music_ViewSet(viewsets.ModelViewSet):
     queryset = Music.objects.all()
