@@ -1,5 +1,5 @@
 dj-database-url==0.5.0
-Django==2.2
+Django==2.2.4
 djangorestframework==3.9.2
 model-mommy==1.6.0
 python-decouple==3.1
